@@ -13,6 +13,7 @@ public class CardQueryService {
 
     private final Connection connection;
 
+    // Busca detalhes de um card pelo ID.
     public Optional<CardDetailsDTO> findById(final Long id) throws SQLException {
         var dao = new CardDAO(connection);
         return dao.findById(id);

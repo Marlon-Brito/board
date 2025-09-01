@@ -17,6 +17,8 @@ import static br.com.dio.persistence.entity.BoardColumnKindEnum.FINAL;
 import static br.com.dio.persistence.entity.BoardColumnKindEnum.INITIAL;
 import static br.com.dio.persistence.entity.BoardColumnKindEnum.PENDING;
 
+// Menu principal da aplicação.
+// Permite criar, selecionar e excluir boards.
 public class MainMenu {
 
     private final Scanner scanner = new Scanner(System.in).useDelimiter("\n");
@@ -40,6 +42,7 @@ public class MainMenu {
         }
     }
 
+    // cria board com colunas padrões (inicial, pendentes, final e cancelamento).
     private void createBoard() throws SQLException {
         var entity = new BoardEntity();
         System.out.println("Informe o nome do seu board");
@@ -80,6 +83,7 @@ public class MainMenu {
 
     }
 
+    // abre menu específico de um board.
     private void selectBoard() throws SQLException {
         System.out.println("Informe o id do board que deseja selecionar");
         var id = scanner.nextLong();
@@ -93,6 +97,7 @@ public class MainMenu {
         }
     }
 
+    // remove um board existente.
     private void deleteBoard() throws SQLException {
         System.out.println("Informe o id do board que será excluido");
         var id = scanner.nextLong();

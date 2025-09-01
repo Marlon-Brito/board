@@ -13,6 +13,7 @@ public class BoardColumnQueryService {
 
     private final Connection connection;
 
+    // Consulta uma coluna do board pelo ID, retornando Optional<BoardColumnEntity>.
     public Optional<BoardColumnEntity> findById(final Long id) throws SQLException {
         var dao = new BoardColumnDAO(connection);
         return dao.findById(id);

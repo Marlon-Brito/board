@@ -15,6 +15,7 @@ public class BoardQueryService {
 
     private final Connection connection;
 
+    // Busca um board pelo ID e carrega suas colunas.
     public Optional<BoardEntity> findById(final Long id) throws SQLException {
         var dao = new BoardDAO(connection);
         var boardColumnDAO = new BoardColumnDAO(connection);
@@ -27,6 +28,7 @@ public class BoardQueryService {
         return Optional.empty();
     }
 
+    // Retorna um DTO com os detalhes do board e suas colunas.
     public Optional<BoardDetailsDTO> showBoardDetails(final Long id) throws SQLException {
         var dao = new BoardDAO(connection);
         var boardColumnDAO = new BoardColumnDAO(connection);

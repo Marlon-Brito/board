@@ -20,6 +20,7 @@ public class BoardColumnDAO {
 
     private final Connection connection;
 
+    // Insere uma nova coluna no board e retorna a entidade preenchida com o ID gerado.
     public BoardColumnEntity insert(final BoardColumnEntity entity) throws SQLException {
         var sql = "INSERT INTO BOARDS_COLUMNS (name, `order`, kind, board_id) VALUES (?, ?, ?, ?);";
         try(var statement = connection.prepareStatement(sql)){
@@ -36,6 +37,7 @@ public class BoardColumnDAO {
         }
     }
 
+    // Busca todas as colunas de um board pelo ID, ordenadas pelo campo "order".
     public List<BoardColumnEntity> findByBoardId(final Long boardId) throws SQLException{
         List<BoardColumnEntity> entities = new ArrayList<>();
         var sql = "SELECT id, name, `order`, kind FROM BOARDS_COLUMNS WHERE board_id = ? ORDER BY `order`";
@@ -55,6 +57,7 @@ public class BoardColumnDAO {
         }
     }
 
+    // Busca colunas de um board com informações extras (detalhes + quantidade de cards).
     public List<BoardColumnDTO> findByBoardIdWithDetails(final Long boardId) throws SQLException {
         List<BoardColumnDTO> dtos = new ArrayList<>();
         var sql =
@@ -86,6 +89,7 @@ public class BoardColumnDAO {
         }
     }
 
+    // Busca uma coluna por ID e traz os cards associados a ela.
     public Optional<BoardColumnEntity> findById(final Long boardId) throws SQLException{
         var sql =
         """

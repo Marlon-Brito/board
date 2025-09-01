@@ -17,6 +17,7 @@ public class CardDAO {
 
     private Connection connection;
 
+    // Insere um novo card em uma coluna.
     public CardEntity insert(final CardEntity entity) throws SQLException {
         var sql = "INSERT INTO CARDS (title, description, board_column_id) values (?, ?, ?);";
         try(var statement = connection.prepareStatement(sql)){
@@ -32,6 +33,7 @@ public class CardDAO {
         return entity;
     }
 
+    // Move um card para outra coluna (atualiza a FK).
     public void moveToColumn(final Long columnId, final Long cardId) throws SQLException{
         var sql = "UPDATE CARDS SET board_column_id = ? WHERE id = ?;";
         try(var statement = connection.prepareStatement(sql)){
@@ -42,6 +44,7 @@ public class CardDAO {
         }
     }
 
+    // Busca um card por ID com detalhes (inclusive bloqueios).
     public Optional<CardDetailsDTO> findById(final Long id) throws SQLException {
         var sql =
                 """

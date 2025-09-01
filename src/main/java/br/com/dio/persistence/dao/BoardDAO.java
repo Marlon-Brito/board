@@ -13,6 +13,7 @@ public class BoardDAO {
 
     private Connection connection;
 
+    // Insere um novo board e retorna a entidade com o ID gerado.
     public BoardEntity insert(final BoardEntity entity) throws SQLException {
         var sql = "INSERT INTO BOARDS (name) values (?);";
         try(var statement = connection.prepareStatement(sql)){
@@ -25,6 +26,7 @@ public class BoardDAO {
         return entity;
     }
 
+    // Remove um board pelo ID.
     public void delete(final Long id) throws SQLException {
         var sql = "DELETE FROM BOARDS WHERE id = ?;";
         try(var statement = connection.prepareStatement(sql)){
@@ -33,6 +35,7 @@ public class BoardDAO {
         }
     }
 
+    // Busca um board pelo ID e retorna, caso exista.
     public Optional<BoardEntity> findById(final Long id) throws SQLException {
         var sql = "SELECT id, name FROM BOARDS WHERE id = ?;";
         try(var statement = connection.prepareStatement(sql)){
@@ -49,6 +52,7 @@ public class BoardDAO {
         }
     }
 
+    // Verifica se um board existe pelo ID.
     public boolean exists(final Long id) throws SQLException {
         var sql = "SELECT 1 FROM BOARDS WHERE id = ?;";
         try(var statement = connection.prepareStatement(sql)){

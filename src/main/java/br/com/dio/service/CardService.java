@@ -16,12 +16,14 @@ import java.util.List;
 import static br.com.dio.persistence.entity.BoardColumnKindEnum.CANCEL;
 import static br.com.dio.persistence.entity.BoardColumnKindEnum.FINAL;
 
-
+// Classe de entrada principal para manipulação de cards.
+// Implementa regras de negócio: criar, mover, cancelar, bloquear e desbloquear cards.
 @AllArgsConstructor
 public class CardService {
 
     private final Connection connection;
 
+    // Cria um novo card no banco.
     public CardEntity create(final CardEntity entity) throws SQLException {
         try {
             var dao = new CardDAO(connection);
@@ -34,6 +36,7 @@ public class CardService {
         }
     }
 
+    // Move um card para a próxima coluna, validando se não está bloqueado ou finalizado.
     public void moveToNextColumn(final Long cardId, final List<BoardColumnInfoDTO> boardColumnsInfo) throws SQLException{
         try{
             var dao = new CardDAO(connection);
@@ -63,6 +66,7 @@ public class CardService {
         }
     }
 
+    // Cancela um card (move para coluna de cancelamento), com validações semelhantes ao método anterior.
     public void cancel(final Long cardId, final Long cancelColumnId ,
                        final List<BoardColumnInfoDTO> boardColumnsInfo) throws SQLException{
         try{
@@ -93,6 +97,7 @@ public class CardService {
         }
     }
 
+    // Bloqueia um card com motivo, salvo no banco via BlockDAO.
     public void block(final Long id, final String reason, final List<BoardColumnInfoDTO> boardColumnsInfo) throws SQLException {
         try{
             var dao = new CardDAO(connection);
@@ -122,6 +127,7 @@ public class CardService {
         }
     }
 
+    // Desbloqueia um card com motivo, salvo no banco.
     public void unblock(final Long id, final String reason) throws SQLException {
         try{
             var dao = new CardDAO(connection);
